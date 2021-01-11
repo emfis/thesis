@@ -3,7 +3,12 @@
 @inject IUserService UserService
 
 <div class="card mt-4">
-    <h4 class="card-header">You're logged in with Blazor & Basic HTTP Authentication!!</h4>
+    <h4 class="card-header">Upload your image:</h4>
+    <div class="card-body">
+       @* <InputFile OnChange="@OnInputFileChange" /> *@
+    </div>
+    <h4 class="card-header">Example async call for api data:</h4>
+    
     <div class="card-body">
         <h6>Users from secure api end point</h6>
         @if (loading)
