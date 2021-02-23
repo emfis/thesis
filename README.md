@@ -2,6 +2,7 @@
 
 Client Side:
 - Basic user authentification and authorisation. (with possibility to relinquish it to any backend authorisation service in the future)
+- Login and Logout functionality
 - Image upload to backend (base64 conversion)
 - Displaying processed image from backend
 
@@ -10,9 +11,9 @@ Server Side:
 - Using image processing libraries converting iamges to grayscale and returning them as base64
 
 Used technologies:
-Client Side: 
+#Client Side: 
  Microsoft blazor + C#
-Server Side
+#Server Side
  Flask + Python
 
 ## To run backend you need to:
