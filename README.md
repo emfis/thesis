@@ -14,7 +14,7 @@ Server Side:
 - Created a base blueprint for the processing endpopints
 - Using image processing libraries converting iamges to grayscale and returning them as base64
 
-Used technologies:
+## Used technologies:
 #### Client Side: 
  Microsoft blazor + C#
 #### Server Side
