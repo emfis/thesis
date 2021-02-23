@@ -4,6 +4,7 @@ Client Side:
 - Basic user authentification and authorisation. (with possibility to relinquish it to any backend authorisation service in the future)
 - Image upload to backend (base64 conversion)
 - Displaying processed image from backend
+
 Server Side:
 - Created a base blueprint for the processing endpopints
 - Using image processing libraries converting iamges to grayscale and returning them as base64
