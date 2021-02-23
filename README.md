@@ -1,5 +1,9 @@
 # Jeremiasz Mozgwa - thesis
 
+## Aplication specification:
+
+Aplication is a combination of frontend (Client side) and backend (Server side). Both of them cointain features functionalities as follows:
+
 Client Side:
 - Basic user authentification and authorisation. (with possibility to relinquish it to any backend authorisation service in the future)
 - Login and Logout functionality
@@ -11,9 +15,9 @@ Server Side:
 - Using image processing libraries converting iamges to grayscale and returning them as base64
 
 Used technologies:
-#Client Side: 
+#### Client Side: 
  Microsoft blazor + C#
-#Server Side
+#### Server Side
  Flask + Python
 
 ## To run backend you need to:
