@@ -27,5 +27,13 @@ I tried the c# way of handling python (the IronPython library) with moderate suc
     - C# leaves a lot of boiler around - the code is less consise.
     - File importing and dependency injection is is ambigous to say the least
 
-### Current project goals:
-Build small backend with a single endpoint that will accept incoming image, invoke any python script and return the image. (ETA: 2days)
+### To run backend you need to:
+    - Go to Backend catalog and activate python environment with . venv/bin/activate
+    - Install dependencies with pip install
+    - Set flask environment variables with:
+    export FLASK_APP=flaskr
+    export FLASK_ENV=development
+    export FLASK_RUN_PORT=7000
+    - run serwer with: flask run
+
+Now endpoint is available for posting under the URL : http://127.0.0.1:7000/convert/simple
