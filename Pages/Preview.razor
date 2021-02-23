@@ -37,7 +37,14 @@
     </p>
 }
 <button @onclick="RunPython">Process</button>
-<button @onclick="LogSomething">Bigoss</button>
+
+@if (returnedImageUri != null)
+{
+    <p>
+        Uploaded image:<br />
+        <img id="image-processed" src="@returnedImageUri" />
+    </p>
+}
 
 @if (processingFinished) {
     <p>
@@ -50,7 +57,6 @@
     Dictionary<IBrowserFile, string> loadedFiles = new Dictionary<IBrowserFile, string>();
 
     long maxFileSize = 1024 * 1024 * 15;
-    int maxAllowedFiles = 3;
 
     bool processingFinished = false;
 
@@ -60,12 +66,15 @@
 
     string imageDataUri;
 
+    string imageBase64;
+
+    string returnedImageUri;
+
     string exceptionMessage;
 
     private class Request
     {
-        public string source { get; set; }
-        public string content { get; set; }
+        public string image { get; set; }
         public string formated { get; set; }
         
     }
@@ -76,43 +85,11 @@
     }
 
 
-    async Task LoadFiles(InputFileChangeEventArgs e)
-    {
-        isLoading = true;
-        loadedFiles.Clear();
-        exceptionMessage = string.Empty;
-
-        try
-        {
-            foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
-            {
-                StateHasChanged();
-
-                using var reader = new StreamReader(file.OpenReadStream(maxFileSize));
-
-                loadedFiles.Add(file, await reader.ReadToEndAsync());
-            }
-        }
-        catch (Exception ex)
-        {
-            exceptionMessage = ex.Message;
-        }
-
-        isLoading = false;
-    }
-
     async Task RunPython(){
-        var payload = new Request {source = "latex", content = "simple" };
+        var payload = new Request {image = imageBase64 };
         
         var response = await Http.PostAsJsonAsync("http://localhost:7000/convert/simple",payload);
-        var content = response.Content.ReadFromJsonAsync<Response>();
-        if (content.IsCompletedSuccessfully){
-            Console.WriteLine("My debug output.");
-        }
-    }
-
-    void LogSomething(){
-        Console.WriteLine("My debug output.");
+        returnedImageUri = await response.Content.ReadAsStringAsync();
     }
 
     async Task LoadImage(InputFileChangeEventArgs e)
@@ -123,8 +100,8 @@
         using var fileStream = imageFile.OpenReadStream(maxFileSize);
         using var memoryStream = new MemoryStream();
         await fileStream.CopyToAsync(memoryStream);
-
-        imageDataUri = $"data:{format};base64,{Convert.ToBase64String(memoryStream.ToArray())}";
+        imageBase64 = Convert.ToBase64String(memoryStream.ToArray());
+        imageDataUri = $"data:{format};base64,{imageBase64}";
     }
     
 }
